@@ -17,7 +17,7 @@ function getNumbersArray() {
             acc += nr;
         }
         data.sort().reverse();
-        console.log(data);
+        console.log("The answer is of day1 , puzzle 1 is : " + data[1]);
     });
 }
 getNumbersArray();

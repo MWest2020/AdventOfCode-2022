@@ -23,7 +23,8 @@ function getNumbersArray(){
         }
         
         data.sort().reverse()
-        console.log(data)
+
+        console.log("The answer is of day 1 , puzzle 1 is : " + data[1])
     }
     )
 }
