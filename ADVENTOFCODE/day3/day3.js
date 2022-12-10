@@ -5,20 +5,40 @@ var fs = require("fs");
 var rd = require("readline");
 var fileName = './day3.txt';
 var reader = rd.createInterface(fs.createReadStream(fileName));
-function getTotalPriority() {
+function getItemPriorityTotal() {
+    var threeStringsArray = ["fill"];
     var totalPriority = 0;
+    var countGroups = 0;
     reader.on('line', function (l) {
-        //write code
-        var a = l.slice(0, l.length / 2);
-        var b = l.slice(l.length / 2, l.length);
-        console.log("first half is : " + a.length);
-        console.log("second half is: " + b.length);
-        var commonCharacter = getCommonCharacter(a, b);
-        totalPriority += getLetterValue(commonCharacter);
-        console.log(totalPriority);
+        // really weird fix for not undefined array
+        if (threeStringsArray[0] === "fill")
+            threeStringsArray.splice(0);
+        threeStringsArray.push(l);
+        var a = threeStringsArray[0];
+        var b = threeStringsArray[1];
+        var c = threeStringsArray[2];
+        if (threeStringsArray.length == 3) {
+            var common = getCommonCharacterOfThree(a, b, c);
+            totalPriority += getLetterValue(common);
+            threeStringsArray.splice(0);
+            console.log("The total answer for day3, part 2 = " + totalPriority);
+        }
     });
 }
-getTotalPriority();
+getItemPriorityTotal();
+// function getTotalPriority(){
+//     let totalPriority: number = 0;
+//     reader.on('line', (l:string) => {
+//         //write code
+//         let a = l.slice(0, l.length / 2)
+//         let b = l.slice(l.length /2 , l.length)
+//         let commonCharacter = getCommonCharacter(a, b)
+//         totalPriority += getLetterValue(commonCharacter)
+//         console.log(totalPriority);
+//     })
+// }
+// needed for day 1 answer
+// getTotalPriority()
 function getCommonCharacter(a, b) {
     for (var _i = 0, a_1 = a; _i < a_1.length; _i++) {
         var charA = a_1[_i];
@@ -30,14 +50,21 @@ function getCommonCharacter(a, b) {
     }
     return "";
 }
+function getCommonCharacterOfThree(a, b, c) {
+    for (var _i = 0, a_2 = a; _i < a_2.length; _i++) {
+        var charA = a_2[_i];
+        for (var _a = 0, b_2 = b; _a < b_2.length; _a++) {
+            var charB = b_2[_a];
+            for (var _b = 0, c_1 = c; _b < c_1.length; _b++) {
+                var charC = c_1[_b];
+                if (charA === charB && charA === charC)
+                    return charA;
+            }
+        }
+    }
+    return "";
+}
 function getLetterValue(string) {
-    // let val={
-    //     a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8, i: 9, j: 10, k: 11, 
-    //     l: 12, m: 13, n: 14,o: 15, p: 16, q: 17, r: 18, s: 19, t: 20, 
-    //     u: 21, v: 22, w: 23, x: 24, y: 25, z: 26, A:27, B:28, C:29, D:30,
-    //     E:31, F:32, G:33, H:34, I:35, J:36, K:37, L:38, M:39, N:40, O:41, 
-    //     P:42, Q:43, R:44, S:45, T:46, U:47, V:48, W:49, X:50, Y:51, Z:52 
-    // }
     var alphabets = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     var letter = string;
