@@ -14,8 +14,20 @@ function getOverlap() {
         var firstPairEnd = getPairEnd(firstPairStartAndEnd);
         var secondPairStart = getPairStart(secondPairStartAndEnd);
         var secondPairEnd = getPairEnd(secondPairStartAndEnd);
-        if (firstPairStart <= secondPairStart && firstPairEnd >= secondPairEnd ||
-            secondPairStart <= firstPairStart && secondPairEnd >= firstPairEnd) {
+        // if(
+        //     firstPairStart <= secondPairStart && firstPairEnd >= secondPairEnd || 
+        //     secondPairStart <= firstPairStart && secondPairEnd >= firstPairEnd) {
+        //         overlapCounter += 1
+        //     }
+        // part 2
+        if (
+        // //first overlaps
+        // firstPairStart <= secondPairStart ||
+        // firstPairEnd >= secondPairStart ||
+        // // seconds overlaps
+        // secondPairStart <= firstPairStart ||
+        // secondPairEnd >= firstPairStart 
+        firstPairStart > secondPairEnd || secondPairStart > firstPairEnd) {
             overlapCounter += 1;
         }
         console.log(overlapCounter);

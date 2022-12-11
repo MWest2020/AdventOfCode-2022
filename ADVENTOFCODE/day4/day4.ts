@@ -20,12 +20,29 @@ function getOverlap(){
 
 
 
-        if(
-            firstPairStart <= secondPairStart && firstPairEnd >= secondPairEnd || 
-            secondPairStart <= firstPairStart && secondPairEnd >= firstPairEnd) {
-                overlapCounter += 1
-            }
+        // if(
+        //     firstPairStart <= secondPairStart && firstPairEnd >= secondPairEnd || 
+        //     secondPairStart <= firstPairStart && secondPairEnd >= firstPairEnd) {
+        //         overlapCounter += 1
+        //     }
         
+        // part 2 (do something with ranges, this doesn't work)
+
+        
+                if (
+                        //first overlaps
+                        firstPairStart <= secondPairStart ||
+                        firstPairEnd >= secondPairStart ||
+                        // seconds overlaps
+                        secondPairStart <= firstPairStart ||
+                        secondPairEnd >= firstPairStart 
+        
+        
+                    ) { overlapCounter += 1}
+
+        
+                
+
 
         console.log(overlapCounter);
         
@@ -59,3 +76,4 @@ function getPairStart(arr: string[]){
 function getPairEnd(arr:string[]){
     return parseInt(arr[1])
 }
+
